@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { useQuery } from "@apollo/client/react"
-import { Box, CircularProgress } from '@mui/material'
+import { Box } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid'
 import type { GridRowsProp, GridColDef } from '@mui/x-data-grid'
 import type { ProductsQuery, SelectedProduct } from '../types'
@@ -59,45 +59,45 @@ export default function ProductsTable({ search, warehouse, status, setOpenRightD
 
   return (
     <div className="bg-white/6 rounded-lg p-4 mt-4">
-      <div className="text-lg font-medium mb-2">Products</div>
-      {loading ? (
-        <div className="flex items-center justify-center py-8">
-          <CircularProgress />
-        </div>
-      ) : (
-        <Box sx={{ height: 400, width: '100%' }}>
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            pageSizeOptions={[10, 25, 50]}
-            initialState={{ pagination: { paginationModel: { pageSize: 10, page: 0 } } }}
-            getRowClassName={(params) => (params.row.status === 'Critical' ? 'critical-row' : '')}
-            onRowClick={(params) => {
-              setOpenRightDrawer(true)
-              setSelectedProduct(params.row as SelectedProduct)
-            }}
-            sx={{
-              border: '1px solid rgba(255,255,255,0.04)',
-              '& .MuiDataGrid-columnHeaders': { bgcolor: 'primary.dark' },
-              '& .MuiDataGrid-cell': { py: 1 },
-              '& .MuiDataGrid-row': { cursor: 'pointer' },
-              // lightly tint the entire row when status is Critical
-              '& .MuiDataGrid-row.critical-row': {
-                background: 'rgba(220, 0, 78, 0.07) !important',
-              },
-              '& .MuiDataGrid-row.critical-row:hover': {
-                background: 'rgba(220, 0, 78, 0.1) !important',
-              },
-              '& .MuiDataGrid-row.critical-row.Mui-selected': {
-                background: 'rgba(220, 0, 78, 0.2) !important',
-              },
-              '& .MuiDataGrid-cell.Mui-selected': {
-                border: 'none'
-              },
-            }}
-          />
-        </Box>
-      )}
+      <Box sx={{ height: 400, width: '100%' }}>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          loading={loading}
+          slotProps={{
+            loadingOverlay: {
+              variant: 'linear-progress',
+              noRowsVariant: 'skeleton',
+            },
+          }}
+          pageSizeOptions={[10, 25, 50]}
+          initialState={{ pagination: { paginationModel: { pageSize: 10, page: 0 } } }}
+          getRowClassName={(params) => (params.row.status === 'Critical' ? 'critical-row' : '')}
+          onRowClick={(params) => {
+            setOpenRightDrawer(true)
+            setSelectedProduct(params.row as SelectedProduct)
+          }}
+          sx={{
+            border: '1px solid rgba(255,255,255,0.04)',
+            '& .MuiDataGrid-columnHeaders': { bgcolor: 'primary.dark' },
+            '& .MuiDataGrid-cell': { py: 1 },
+            '& .MuiDataGrid-row': { cursor: 'pointer' },
+            // lightly tint the entire row when status is Critical
+            '& .MuiDataGrid-row.critical-row': {
+              background: 'rgba(220, 0, 78, 0.07) !important',
+            },
+            '& .MuiDataGrid-row.critical-row:hover': {
+              background: 'rgba(220, 0, 78, 0.1) !important',
+            },
+            '& .MuiDataGrid-row.critical-row.Mui-selected': {
+              background: 'rgba(220, 0, 78, 0.2) !important',
+            },
+            '& .MuiDataGrid-cell.Mui-selected': {
+              border: 'none'
+            },
+          }}
+        />
+      </Box>
     </div>
   )
 }
