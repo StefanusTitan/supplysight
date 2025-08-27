@@ -11,7 +11,7 @@ export default function TopBar({ range, setRange }: TopBarProps) {
     <header className="bg-gray-900/80 backdrop-blur-sm rounded-lg">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         <div className="text-xl font-semibold">SupplySight</div>
-        <div className="flex gap-2">
+        <div className="hidden lg:flex gap-2">
           <button
             className={`px-3 py-1 rounded cursor-pointer transition-colors duration-150 focus:outline-none ${range === '7d' ? 'bg-blue-900 text-white' : 'bg-transparent text-gray-300 border border-transparent hover:bg-white/5 hover:text-white active:bg-white/10 active:scale-95'}`}
             onClick={() => setRange('7d')}
@@ -35,6 +35,17 @@ export default function TopBar({ range, setRange }: TopBarProps) {
           >
             {RANGES['30d']}
           </button>
+        </div>
+        <div className="lg:hidden">
+          <select
+            value={range}
+            onChange={(e) => setRange(e.target.value as Range)}
+            className="bg-gray-800 text-gray-300 border border-gray-600 rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            {Object.entries(RANGES).map(([key, label]) => (
+              <option key={key} value={key}>{label}</option>
+            ))}
+          </select>
         </div>
       </div>
     </header>

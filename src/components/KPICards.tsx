@@ -38,15 +38,15 @@ export default function KPICards({ search, warehouse, status }: KPICardsProps) {
 
   return (
     <div className="grid grid-cols-3 sm:grid-cols-3 gap-4 mt-4">
-      <div className="bg-white/6 rounded-lg p-4">
+      <div className="bg-white/6 rounded-lg p-4 items-center justify-content-center content-center">
         <div className="text-sm text-gray-300">Total Stock</div>
         <div className="text-2xl font-semibold">{totals.stock}</div>
       </div>
-      <div className="bg-white/6 rounded-lg p-4">
+      <div className="bg-white/6 rounded-lg p-4 justify-content-center content-center">
         <div className="text-sm text-gray-300">Total Demand</div>
         <div className="text-2xl font-semibold">{totals.demand}</div>
       </div>
-      <div className="bg-white/6 rounded-lg p-4">
+      <div className="bg-white/6 rounded-lg p-4 justify-content-center content-center">
         <div className="text-sm text-gray-300">Fill Rate</div>
         <div className="text-2xl font-semibold">{totals.fillRate.toFixed(1)}%</div>
       </div>

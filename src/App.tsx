@@ -61,9 +61,19 @@ function AppInner({ setOpenRightDrawer, setSelectedProduct }: { setOpenRightDraw
         <div className="text-2xl font-semibold">Overview — {RANGES[range]}</div>
         <KPICards search={debouncedInputValue} warehouse={warehouse} status={status} />
         <KPILineChart range={range} />
-        {/* Filters row (Material UI components, dark-mode friendly) */}
+        {/* Filters row */}
         <div className="flex flex-row sm:items-center gap-3 mt-4">
-          <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', width: '100%' }}>
+          <Box 
+            sx={{ display: 'flex',
+              gap: 2,
+              width: '100%',
+              flexDirection: 'column',
+              [theme.breakpoints.up('lg')]: {
+                flexDirection: 'row',
+                alignItems: 'center',
+              }, 
+            }}
+          >
             <TextField
               size="small"
               placeholder="Search (name, SKU, ID)"
@@ -72,7 +82,7 @@ function AppInner({ setOpenRightDrawer, setSelectedProduct }: { setOpenRightDraw
               sx={{ minWidth: 240, bgcolor: 'background.paper', borderRadius: 1 }}
             />
 
-            <FormControl size="small" sx={{ m: 1, minWidth: 100 }}>
+            <FormControl size="small" sx={{ minWidth: 100 }}>
               <InputLabel id="warehouse-label">Warehouse</InputLabel>
               <Select
                 labelId="warehouse-label"
