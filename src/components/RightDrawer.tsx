@@ -69,7 +69,7 @@ export default function RightDrawer({ open, setOpen, selectedProduct }: RightDra
 
   return (
     <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
-      <div style={{ width: 360, padding: 16 }}>
+      <div className="p-4">
         <div className="text-lg font-medium mb-2">Details</div>
         <div className="text-sm text-gray-300">
           {selectedProduct ? (
