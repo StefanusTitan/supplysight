@@ -70,7 +70,8 @@ const sampleWarehouses = [
 
 function generateKpis(days: number): { date: string; stock: number; demand: number }[] {
   const kpis = [];
-  const today = new Date('2025-08-26T00:00:00');
+  const today = new Date();
+  today.setDate(today.getDate() - 1);
   let currentStock = 420;
   let currentDemand = 440;
 
